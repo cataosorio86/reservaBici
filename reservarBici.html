@@ -1,0 +1,147 @@
+<html>
+<head>
+	<title>Inmobiliaria</title>
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	 <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script>
+
+    
+
+window.onload = function(){
+  $("#reservarBici").click(enviar);
+}
+
+
+  function enviar() { 
+  var marca=$("#marca").val(); 
+  var color=$("#color").val(); 
+  var capacidad=$("#capacidad").val(); 
+  var precio=$("#precio").val(); 
+  var estado = $("#estado").val();
+  var cantidad = $("#cantidad").val();
+  
+
+  $.ajax({ 
+  async:true, 
+  type: "POST", 
+  dataType: "html", contentType: "application/x-www-form-urlencoded", 
+  url:"http://cataoso.hol.es/reservabici/reservarBici.php", 
+  data:"marca="+marca+
+      "&color="+color+
+      "&capacidad="+capacidad+
+      "&precio="+precio+
+      "&estado="+estado+
+      "&cantidad="+cantidad,
+  beforeSend:inicioEnvio, 
+  success:llegadaDatos, 
+  timeout:4000, 
+  error:problemas }); 
+  return false; 
+} 
+
+ function inicioEnvio(datos)
+        {
+            $("#respuesta").text(datos);
+        }
+
+        function llegadaDatos(datos)
+        {
+            $("#respuesta").text(datos);
+                       
+        }
+
+        function problemas()
+        {
+            $("#respuesta").text('Problemas en el servidor.');
+        }
+    </script>
+</head>
+<body>
+
+  <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <ul class="nav nav-pills">
+        <li class="active" role="presentation"><a href="reservarBici.html">Reservar Bicicleta</a></li>
+       <li class="active" role="presentation"><a href="consultarBici.html">Consultar Bicicletas</a></li>
+       <li class="active" role="presentation"><a href="estadoReserva.html">Ver reserva</a></li>
+       <li class="active" role="presentation"><a href="crearUsuario.html">Crear Usuario</a></li>
+    </ul>
+  </div>
+</nav>
+
+<h1>Reservar Bicicleta</h1>
+
+
+ <form method="POST" enctype="multipart/form-data">
+  <div class="form-group">
+    <label for="marca">Marca</label>
+    <select id="marca" name="marca" class="form-control">
+      <option value="Specialized">Specialized</option>
+      <option value="Trek">Trek</option>
+      <option value="Merida">Merida</option>
+      <option value="Scott">Scott</option>
+      <option value="Giant">Giant</option>
+      <option value="Cannondale">Cannondale</option>
+    </select>
+  </div>
+
+   <div class="form-group">
+    <label for="color">Color:</label>
+    <select id="color" name="color" class="form-control">
+      <option value="Negro">Negro</option>
+      <option value="Blanco">Blanco</option>
+      <option value="Azul">Azul</option>
+      <option value="Verde">Verde</option>
+      <option value="Amarillo">Amarillo</option>
+    </select>
+  </div>
+
+ <div class="form-group">
+    <label for="capacidad">Capacidad:</label>
+    <select id="capacidad" name="capacidad" class="form-control">
+      <option value="1">1</option>
+      <option value="1">2</option>
+      <option value="3">3</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="precio">Precio:</label>
+    <select id="precio" name="precio" class="form-control">
+      <option value="1000000">1.000.000</option>
+      <option value="1500000">1.500.000</option>
+      <option value="3000000">3.000.000</option>
+      <option value="5000000">5.000.000</option>
+      <option value="7000000">7.000.000</option>
+    </select>
+  </div>
+
+ <div class="form-group" style='display:none;'>
+    <label for="estado">Estado:</label>
+     <select id="estado" name="estado" class="form-control">
+      <option value="reservada">reservada</option>
+    </select>
+  </div>
+
+  <div class="form-group" >
+    <label for="cantidad">Cantidad: </label>
+      <select id="cantidad" name="cantidad" class="form-control">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select>  
+  </div>
+
+<button type="button" id="reservarBici" class="btn btn-default">Reservar Bicicleta</button>
+
+ </form>
+<div id="respuesta"> </div>
+
+
+
+
+</body>
+</html>

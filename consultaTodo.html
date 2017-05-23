@@ -1,0 +1,37 @@
+<html>
+<head>
+	<title>Consultar Bicis</title>
+	 <link href="css/bootstrap.min.css" rel="stylesheet">
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js">
+	 </script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+    (function(){
+      $("#respuesta").load("http://cataoso.hol.es/reservabici/consultaTodo.php");
+    });
+
+    window.onload = function(){
+      $("#resultado").load("http://cataoso.hol.es/reservabici/consultaTodo.php");
+    }
+
+    </script>
+</head>
+<body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <ul class="nav nav-pills">
+      <li class="active" role="presentation"><a href="reservarBici.html">Reservar Bicicleta</a></li>
+       <li class="active" role="presentation"><a href="consultarBici.html">Consultar Bicicletas</a></li>
+       <li class="active" role="presentation"><a href="estadoReserva.html">Ver reserva</a></li>
+       <li class="active" role="presentation"><a href="crearUsuario.html">Crear Usuario</a></li>
+    </ul>
+  </div>
+</nav>
+<h1>Consultar Propiedades</h1>
+
+
+<div id="resultado"></div>
+
+
+</body>
+</html>

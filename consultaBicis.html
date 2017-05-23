@@ -1,0 +1,65 @@
+<html>
+<head>
+	<title>Consultar Bicis</title>
+	 <link href="css/bootstrap.min.css" rel="stylesheet">
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js">
+	 </script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+    (function(){
+      $("#respuesta").load("http://cataoso.hol.es/reservabici/consultaBicis.php");
+    });
+
+    window.onload = function(){
+      $("#resultado").load("http://cataoso.hol.es/reservabici/consultaBicis.php");
+      $(document).on("click", ".order",function() {
+          var id_bicicleta=$( this ).attr('id-bicicleta');
+          
+        $.ajax({ 
+          async:true, 
+          type: "POST", 
+          dataType: "html", contentType: "application/x-www-form-urlencoded", 
+          url:"http://cataoso.hol.es/reservabici/reservaBicicleta.php", 
+          data:"id_bicicleta="+id_bicicleta, beforeSend:inicioEnvio, success:llegadaDatos, 
+          timeout:4000, 
+          error:problemas }); 
+        return false;
+        });   
+    }
+     
+
+      function inicioEnvio(){
+        $("#resultado").text("Se estan enviando los datos");
+      }
+
+      function llegadaDatos(datos){
+        $("#resultado").html(datos);                       
+      }
+
+      function problemas(){
+        $("#resultado").text('Problemas en el servidor.');
+      }
+
+
+
+
+    </script>
+</head>
+<body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <ul class="nav nav-pills">
+      <li class="active" role="presentation"><a href="consultaBicis.html">Reservar Bicicleta</a></li>
+       <li class="active" role="presentation"><a href="consultaVarios.html">Consultar Bicicletas</a></li>
+       <li class="active" role="presentation"><a href="estadoReserva.html">Ver reserva</a></li>
+       <li class="active" role="presentation"><a href="crearUsuario.html">Crear Usuario</a></li>
+  </div>
+</nav>
+<h1>Consultar Bicicletas </h1>
+
+
+<div id="resultado"></div>
+
+
+</body>
+</html>
